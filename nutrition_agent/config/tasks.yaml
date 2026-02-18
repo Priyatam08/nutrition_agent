@@ -1,0 +1,68 @@
+parse_meal_task:
+  description: >
+    Parse the meal description: {meal_description}
+    
+    Identify and list all individual food items in this meal. 
+    A meal can contain multiple items (e.g., "chicken, rice, and vegetables" contains 3 items).
+    Extract each food item clearly and list them in a structured format.
+    
+    For example, if the meal is "grilled chicken breast with brown rice and steamed broccoli",
+    you should identify:
+    1. Chicken breast (grilled)
+    2. Brown rice
+    3. Broccoli (steamed)
+    
+    Provide a clear list of all food items that need nutrition lookup.
+  expected_output: >
+    A structured list of all food items in the meal, with each item clearly identified.
+    Format: A numbered list or structured format showing each food item separately.
+  agent: meal_parser
+  output_file: output/parsed_meal_items.md
+
+research_nutrition_task:
+  description: >
+    Using the list of food items identified from the meal, look up detailed nutrition information
+    for EACH food item using the nutrition_lookup tool.
+    
+    You must look up nutrition data for ALL food items in the meal, not just one.
+    For each food item, use the nutrition_lookup tool to get:
+    - Calories
+    - Macronutrients (protein, carbohydrates, fats)
+    - Fiber and sugars
+    - Key micronutrients (calcium, iron, potassium, sodium, vitamins)
+    
+    Collect and organize nutrition data for all food items in the meal.
+  expected_output: >
+    Detailed nutrition information for each food item in the meal.
+    Format: Organized nutrition data for each item, showing all key nutritional values.
+  agent: nutrition_researcher
+  output_file: output/nutrition_data.md
+
+analyze_nutrition_task:
+  description: >
+    Analyze the complete nutrition profile of the meal by aggregating data from all food items.
+    
+    Calculate the total nutrition for the entire meal:
+    - Total calories
+    - Total protein, carbohydrates, and fats
+    - Total fiber and sugars
+    - Total micronutrients (calcium, iron, potassium, sodium, vitamins)
+    
+    Provide a comprehensive analysis including:
+    1. Total nutrition summary (all values combined)
+    2. Nutritional breakdown by food item
+    3. Assessment of nutritional balance
+    4. Health insights and recommendations
+    5. Any notable nutritional highlights or concerns
+    
+    Present the analysis in a clear, organized format that's easy to understand.
+  expected_output: >
+    A comprehensive nutrition analysis report including:
+    - Total nutrition summary for the entire meal
+    - Breakdown by food item
+    - Nutritional balance assessment
+    - Health insights and recommendations
+    - Formatted in a clear, readable structure
+  agent: nutrition_analyst
+  output_file: output/nutrition_analysis.md
+
